@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@Transactional // Добавляем @Transactional на уровне класса
 public class UserServiceImpl implements UserService {
     private final UserDao userDao;
 
@@ -25,12 +26,14 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
+    @Transactional(readOnly = true)
     public List<User> getAllUsers() {
         return userDao.getAllUsers();
     }
 
 
     @Override
+    @Transactional(readOnly = true)
     public User getUser(long id) {
         return userDao.getUser(id);
     }
